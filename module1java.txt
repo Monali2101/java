@@ -1,0 +1,171 @@
+Q1.
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+Q2. What are the key steps involved in the programming process?
+
+Step	Name	
+1	Problem Definition	
+2	Algorithm Design	
+3	Coding	
+4	Compilation & Execution	
+5	Testing & Debugging	
+6	Documentation
+7	Maintenance	
+
+Q3. Types of Programming Languages
+
+1. Machine Language	Uses 0s and 1s	—
+2. Assembly Language	Uses symbols and codes	MOV A, B
+3. High-Level Language 	Easy English-like language	Java, Python
+4. Middle-Level Language	Mix of both low and high level	C
+
+Q4. World Wide Web & How Internet Works
+
+[User’s Client Device (Browser/App)]
+         |
+         v
+[DNS Server] ← resolves domain → gives Server IP
+         |
+         v
+[Client (transport + network stack)]
+         |
+   (3-way handshake, possibly TLS)
+         |
+         v
+[Network Routers / Switches / ISPs]  → many hops
+         |
+         v
+[Server (listening on port, receiving packets)]
+         |
+   (Processes request: database, app logic, etc.)
+         |
+         v
+[Server sends HTTP/HTTPS response packets]
+         |
+         v
+[Network Routers → back to client]
+         |
+         v
+[Client receives, reassembles, renders content]
+
+
+Q4. Network Layers on Client and Server
+
+ Layer                                                                                                  
+Application Layer                                  
+Transport Layer      
+ Network / Internet Layer
+Data Link Layer         
+Physical Layer 
+
+LAB EXERCISE: Design a simple HTTP client-server communication in any language
+ 
+import java.io.*;
+import java.net.*;
+
+public class SimpleHTTPServer {
+    public static void main(String[] args) {
+        int port = 8080;
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server is listening on port " + port + "...");
+
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Connection from " + clientSocket.getInetAddress());
+
+                // Read request from client
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String line;
+                while (!(line = in.readLine()).isEmpty()) {
+                    System.out.println(line);
+                }
+
+                // Send response to client
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
+                out.println("HTTP/1.1 200 OK");
+                out.println("Content-Type: text/plain");
+                out.println(); // blank line between headers and body
+                out.println("Hello from server!");
+                out.flush();
+
+                clientSocket.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+Q5. Explain Client Server Communication
+
+Client-Server Model:
+
+Client: Sends requests for resources/services.
+
+Server: Listens for requests, processes them, and sends back responses.
+
+Communication occurs via a network protocol (e.g., HTTP).
+
+Usually request-response model: client initiates, server responds.
+
+Q6. Types of Internet Connections.
+
+Dial-up
+
+Uses phone lines to connect to the internet.
+
+Pros: Cheap, widely available.
+
+Cons: Very slow, blocks phone line while connected.
+
+DSL / Broadband
+
+Uses phone lines but provides faster speed than dial-up.
+
+Pros: Always-on connection, faster than dial-up.
+
+Cons: Speed depends on distance from the exchange.
+
+Cable
+
+Uses cable TV lines to provide internet access.
+
+Pros: High speed.
+
+Cons: Shared bandwidth can reduce speed during peak hours.
+
+Fiber-optic
+
+Uses light signals through fiber cables.
+
+Pros: Very fast, low latency, reliable.
+
+Cons: Expensive, not available everywhere.
+
+Satellite
+
+Internet via satellite communication.
+
+Pros: Available almost anywhere, good for remote areas.
+
+Cons: High latency, affected by weather, expensive.
+
+Mobile (3G / 4G / 5G)
+
+Wireless internet using cellular networks.
+
+Pros: Portable, convenient, decent speed.
+
+Cons: Data limits, speed depends on coverage and network congestion.
+
+Difference between Broadband and Fiber-optic:
+
+Broadband: General high-speed internet (DSL, cable).
+
+Fiber-optic: Uses light signals, faster and more reliable, supports higher bandwidth
