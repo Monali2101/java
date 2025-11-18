@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        GymManager gm = new GymManager();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n===== GYM MANAGER =====");
+            System.out.println("1. Member Management");
+            System.out.println("2. Workout Plans");
+            System.out.println("3. Trainer Management");
+            System.out.println("4. Payment Tracking");
+            System.out.println("0. Exit");
+            System.out.print("Choose: ");
+
+            int ch = sc.nextInt();
+
+            switch (ch) {
+                case 1:
+                    System.out.println("1. Add Member\n2. View Members\n3. Search Member");
+                    int c1 = sc.nextInt();
+                    if (c1 == 1) gm.addMember();
+                    else if (c1 == 2) gm.viewMembers();
+                    else if (c1 == 3) gm.searchMember();
+                    break;
+
+                case 2:
+                    System.out.println("1. Assign Workout\n2. View Workout History");
+                    int c2 = sc.nextInt();
+                    if (c2 == 1) gm.assignWorkoutPlan();
+                    else gm.viewWorkoutHistory();
+                    break;
+
+                case 3:
+                    System.out.println("1. Add Trainer\n2. View Trainers");
+                    int c3 = sc.nextInt();
+                    if (c3 == 1) gm.addTrainer();
+                    else gm.viewTrainers();
+                    break;
+
+                case 4:
+                    System.out.println("1. Add Payment\n2. View Payments");
+                    int c4 = sc.nextInt();
+                    if (c4 == 1) gm.addPayment();
+                    else gm.viewPayments();
+                    break;
+
+                case 0:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+            }
+        }
+    }
+}
